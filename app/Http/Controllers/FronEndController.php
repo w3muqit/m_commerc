@@ -14,6 +14,7 @@ use App\Models\thumbnail;
 use Str;
 use Image;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class FronEndController extends Controller
 {
@@ -114,7 +115,8 @@ function single_product($slug){
     }
 
     function view_cart(Request $request){
-        $coupon_table=coupon::where('coupon_name',$request->coupon)->get();
+        if(cart::where('customer_id',Auth::guard('customerlogin')->id())->exists()){
+            $coupon_table=coupon::where('coupon_name',$request->coupon)->get();
         // print_r($coupon_table);
         $discount= 0;
         $message= null ;
@@ -145,7 +147,12 @@ function single_product($slug){
             'coupon'=>$request->coupon,
             'type'=>$type,
            ]);
-           print_r($request->all());    }
+           print_r($request->all());
+        }
+        else{
+            return view('frontend.cart_empty');
+        }
+    }
 
     function card_update(Request $request){
         $cart=$request->all();

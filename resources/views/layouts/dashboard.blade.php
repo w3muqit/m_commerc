@@ -137,6 +137,7 @@
                             <li><a href="{{ route('view.product') }}">View Product</a></li>
                             <li><a href="{{ route('banner') }}">Add Banner</a></li>
                             <li><a href="{{ route('coupon') }}">Add Coupon</a></li>
+                            <li><a href="{{ route('view.order') }}">View Order</a></li>
                         </ul>
                     </li>
 

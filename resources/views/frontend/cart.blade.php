@@ -83,7 +83,7 @@
                         <span>Subtotal</span> <span class="ml-auto text-dark ft-medium">{{ $subtotal }}</span>
                       </li>
                       <li class="list-group-item d-flex text-dark fs-sm ft-regular">
-                        <span>Discount</span> <span class="ml-auto text-dark ft-medium">{{ ($coupon==''?'':'-') }}{{ $discount }}{{ ($type==1?'%':'TK') }}</span>
+                        <span>Discount</span> <span class="ml-auto text-dark ft-medium">{{ ($coupon==''?'':'-') }}{{ ($type==1?$subtotal*$discount/100:$discount) }}</span>
                       </li>
 
                       @php
@@ -104,7 +104,10 @@
                   </div>
                 </div>
                 @php
-                    session('totak')
+                    session([
+                        'total'=>$total,
+                        'discount'=>($type==1?$subtotal*$discount/100:$discount),
+                    ])
                 @endphp
 
                 <a class="btn btn-block btn-dark mb-3" href="{{ route('checkout') }}">Proceed to Checkout</a>

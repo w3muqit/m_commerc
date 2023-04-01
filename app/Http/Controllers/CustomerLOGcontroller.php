@@ -20,4 +20,10 @@ class CustomerLOGcontroller extends Controller
         Auth::guard('customerlogin')->logout();
         return redirect('/');
     }
+    function customer_profile(){
+        return view('frontend.customer_profile');
+    }
+    function customer_status(){
+        return view('frontend.order_status');
+        }
 }
