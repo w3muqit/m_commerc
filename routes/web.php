@@ -3,6 +3,7 @@
 use App\Http\Controllers\cartcontroller;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\checkoutcontroller;
+use App\Http\Controllers\customercontroller;
 use App\Http\Controllers\CustomerLOGcontroller;
 use App\Http\Controllers\customerLOGINcontroler;
 use App\Http\Controllers\customerlogincontroller;
@@ -15,6 +16,8 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SubCategoryController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\StripePaymentController;
+use App\Http\Controllers\PDFController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -82,7 +85,7 @@ Route::post('/add/inventory', [ProductController::class, 'add_inventory'])->name
 Route::get('/delete/inventory/{inventory_id}', [ProductController::class, 'delete_inventory'])->name('delete.inventory');
 // customer register //
 Route::post('/customer/reg/log', [CustomerREgcontroller::class, 'customer_log_reg'])->name('customer.log.reg');
-Route::post('/customer/login', [CustomerLOGcontroller::class, 'customer_login'])->name('customer.login');
+Route::post('/customer', [CustomerLOGcontroller::class, 'customer_login'])->name('customer.login');
 Route::get('/customer/logout', [CustomerLOGcontroller::class, 'customer_logout'])->name('customer.logout');
 Route::get('/customer/profile', [CustomerLOGcontroller::class, 'customer_profile'])->name('customer.profile');
 Route::get('/customer/status', [CustomerLOGcontroller::class, 'customer_status'])->name('customer.status');
@@ -103,3 +106,13 @@ Route::get('/order/confirm/{order_id}', [checkoutcontroller::class, 'order_confi
 // order//
 Route::get('/view/order',[ordercontroller::class,'view_order'])->name('view.order');
 Route::post('/order/status',[ordercontroller::class,'order_status'])->name('order.status');
+
+// stripe//
+Route::controller(StripePaymentController::class)->group(function(){
+    Route::get('stripe', 'stripe');
+    Route::post('stripe', 'stripePost')->name('stripe.post');
+});
+
+// invoice //
+Route::get('/invoice/download/{order_id}',[customercontroller::class,'invoice'])->name('download.order');
+Route::get('/test/invoice/{order_id}',[customercontroller::class,'test_invoice'])->name('test.onvoice');

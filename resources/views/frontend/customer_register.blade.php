@@ -30,6 +30,9 @@
                             </div>
                         </div>
                     </div>
+                    <div class="p-2">
+                        {!! NoCaptcha::display() !!}
+                    </div>
 
                     <div class="form-group">
                         <button type="submit" class="btn btn-md full-width bg-dark text-light fs-md ft-medium">Login</button>

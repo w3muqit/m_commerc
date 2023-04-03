@@ -116,7 +116,7 @@
 											  <option value="4">4</option>
 											  <option value="5">5</option>
 											</select> --}}
-                                            <input type="number" min="1" class="form-control" name="quantity">
+                                            <input type="number" min="1" value="1" class="form-control" name="quantity">
 										</div>
 										<div class="col-12 col-lg-8">
 											<!-- Submit -->

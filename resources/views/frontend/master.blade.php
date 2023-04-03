@@ -527,6 +527,7 @@
             document.getElementById("Search").style.display = "none";
         }
     </script>
+    {!! NoCaptcha::renderJs() !!}
     @yield('footer_script')
 
 </body>

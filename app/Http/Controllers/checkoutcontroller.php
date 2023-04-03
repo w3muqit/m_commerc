@@ -43,7 +43,8 @@ class checkoutcontroller extends Controller
 
     function checkout_store(Request $request){
         $order_id='#'.'-'.Str::random(3).rand(555555555,6666666);
-        // order store//
+        if($request->payment_method==1){
+                    // order store//
         order::insert([
             'order_id'=>$order_id,
             'customer_id'=>Auth::guard('customerlogin')->id(),
@@ -95,6 +96,17 @@ class checkoutcontroller extends Controller
         // elseif()
         $order_id=substr($order_id,2);
         return redirect()->route('order.confirm',$order_id)->with('success','success');
+        }
+        elseif($request->payment_method==2){
+
+        }
+        else{
+            $for_stripe=$request->all();
+            return view('frontend.stripe',[
+                'for_stripe'=>$for_stripe,
+            ]);
+        }
+
 
 
      }
