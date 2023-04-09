@@ -1,5 +1,6 @@
 @extends('layouts.dashboard')
 
+@can('view_product')
 @section('content')
     <div class="container">
         <div class="card">
@@ -76,7 +77,8 @@
             </div>
         </div>
     </div>
-@endsection
+    @endsection
+    @endcan
 
 @section('footer_script')
     <script>

@@ -1,6 +1,7 @@
 @extends('layouts.dashboard')
 
 
+@can('view_product_list')
 @section('content')
     <div class="container-floied">
         <div class="row">
@@ -64,4 +65,5 @@
             </div>
         </div>
     </div>
-@endsection
+    @endsection
+    @endcan

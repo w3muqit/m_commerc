@@ -1,6 +1,7 @@
 @extends('layouts.dashboard')
 
 @section('content')
+@can('view_subcategory')
     <div class="container-fluied">
         <div class="row">
             <div class="col-lg-9">
@@ -35,8 +36,13 @@
                                 </td>
                                 <td>{{ $subcategry->created_at }}</td>
                                 <td>
+                                    @can('dit_subcategory')
                                     <a href="{{ route('edit.subcategory',$subcategry->id) }}" class="btn btn-success">Edit</a>
+                                    @endcan
+                                    @can('delete_subcategory')
+
                                     <a href="{{ route('delete.subcategory',$subcategry->id) }}" class="btn btn-danger">Delete</a>
+                                    @endcan
                                 </td>
                             </tr>
                             @endforeach
@@ -87,4 +93,5 @@
             </div>
         </div>
     </div>
+    @endcan
 @endsection

@@ -18,6 +18,8 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\StripePaymentController;
 use App\Http\Controllers\PDFController;
+use App\Http\Controllers\rolecontroller;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -116,3 +118,10 @@ Route::controller(StripePaymentController::class)->group(function(){
 // invoice //
 Route::get('/invoice/download/{order_id}',[customercontroller::class,'invoice'])->name('download.order');
 Route::get('/test/invoice/{order_id}',[customercontroller::class,'test_invoice'])->name('test.onvoice');
+// permission//
+Route::get('/role',[rolecontroller::class,'role'])->name('role');
+Route::post('/permission/store',[rolecontroller::class,'permission_store'])->name('permission.store');
+Route::post('/role/store',[rolecontroller::class,'role_store'])->name('role.store');
+Route::post('/asign/store',[rolecontroller::class,'asign_store'])->name('asign.store');
+Route::get('/remove/role/{user_id}',[rolecontroller::class,'remove_role'])->name('remove.role');
+Route::get('/remove/permission/{role_id}',[rolecontroller::class,'remove_permission'])->name('permission.remove');

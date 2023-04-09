@@ -1,6 +1,7 @@
 @extends('layouts.dashboard')
 
 @section('content')
+@can('view_category')
         <div class="container-floied">
             <div class="row">
                 <div class="col-lg-9">
@@ -39,8 +40,12 @@
                                     </td>
                                     <td>{{ $category->created_at->diffForHumans()  }}</td>
                                     <td>
+                                        @can('edit_category')
                                         <a href="{{ route('edit.category',$category->id) }}" class="btn btn-success">Edit</a>
+                                        @endcan
+                                        @can('delete_category')
                                         <a href="{{ route('delete.category',$category->id) }}" class="btn btn-danger">Delete</a>
+                                        @endcan
                                     </td>
                                 </tr>
                                 @endforeach
@@ -167,6 +172,7 @@
 
             </div>
         </div>
+        @endcan
 @endsection
 @section('footer_script')
 
